@@ -4,8 +4,9 @@ import Layout from "../components/layout"
 
 const IndexPage = () => (
   <Layout>
-    <h1>Hello</h1>
-    <p>Nothing to see here, but soon there will be a blog.</p>
+    <h1>There should be the blog</h1>
+    <p>Hello everyone, this is a start for a hopefully long and exciting blogging journey. Stay tuned.
+    </p>
   </Layout>
 )
 
