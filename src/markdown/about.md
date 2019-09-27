@@ -1,5 +1,5 @@
 ---
-title: "There should be the blog"
+title: "There should be blog"
 date: "27-09-2019"
 ---
 

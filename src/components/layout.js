@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import {Helmet} from "react-helmet";
 
 import "./layout.css"
 
@@ -26,6 +27,11 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>Denis Bodnar blog</title>
+          <link rel="canonical" href="https:denisbodnar.com" />
+      </Helmet>
       <div
         style={{
           margin: `0 auto`,
