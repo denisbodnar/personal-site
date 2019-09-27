@@ -7,10 +7,23 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { useStaticQuery, graphql } from "gatsby"
 
 import "./layout.css"
 
 const Layout = ({ children }) => {
+  const data = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `
+  )
+
   return (
     <>
       <div
@@ -20,6 +33,7 @@ const Layout = ({ children }) => {
           padding: `2rem`,
         }}
       >
+        <h1>{data.site.siteMetadata.title}</h1>
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}
