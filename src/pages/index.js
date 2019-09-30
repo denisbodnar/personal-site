@@ -5,19 +5,18 @@ import Layout from "../components/layout"
 
 export default ({ data }) => (
   <Layout>
-    <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-        {data.allMarkdownRemark.edges.map(({ node }) => (
-          <div key={node.id}>
-            <Link
-              to={node.fields.slug}
-            >
-              <h3>
-                {node.frontmatter.title}{" "} — {node.frontmatter.date}
-              </h3>
-              <p>{node.excerpt}</p>
-            </Link>
-          </div>
-        ))}
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <div key={node.id}>
+          <Link
+            to={node.fields.slug}
+          >
+            <h3>
+              {node.frontmatter.title}{" "} — {node.frontmatter.date}
+            </h3>
+            <p>{node.excerpt}</p>
+          </Link>
+        </div>
+      ))}
   </Layout>
 )
 

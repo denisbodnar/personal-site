@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Writing a code`,
-    description: `Daily life of frontend developer`,
+    title: `This is fine`,
+    description: `Denis Bodnar personal blog`,
     author: `Denis Bodnar`,
   },
   plugins: [
@@ -41,5 +41,11 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-15079211-1",
+      },
+    },
   ],
 }

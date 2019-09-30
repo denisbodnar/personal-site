@@ -29,8 +29,8 @@ const Layout = ({ children }) => {
     <>
       <Helmet>
           <meta charSet="utf-8" />
-          <title>Denis Bodnar blog</title>
-          <link rel="canonical" href="https:denisbodnar.com" />
+          <title>{data.site.siteMetadata.title}</title>
+          <link rel="canonical" href="https://denisbodnar.com" />
       </Helmet>
       <div
         style={{
@@ -39,10 +39,10 @@ const Layout = ({ children }) => {
           padding: `2rem`,
         }}
       >
-        <h1>{data.site.siteMetadata.title}</h1>
+        <h2>{data.site.siteMetadata.title}</h2>
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}
+          © Denis Bodnar {new Date().getFullYear()}
         </footer>
       </div>
     </>
