@@ -5,6 +5,10 @@ import Layout from "../components/layout"
 
 export default ({ data }) => (
   <Layout>
+    <h4>
+      A personal blog about living and coding daily
+    </h4>
+    <hr/>
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.id}>
           <Link
@@ -13,8 +17,8 @@ export default ({ data }) => (
             <h3>
               {node.frontmatter.title}{" "} — {node.frontmatter.date}
             </h3>
-            <p>{node.excerpt}</p>
           </Link>
+            <p>{node.excerpt}</p>
         </div>
       ))}
   </Layout>

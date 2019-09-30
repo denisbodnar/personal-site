@@ -7,7 +7,7 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import {Helmet} from "react-helmet";
 
 import "./layout.css"
@@ -39,7 +39,12 @@ const Layout = ({ children }) => {
           padding: `2rem`,
         }}
       >
-        <h2>{data.site.siteMetadata.title}</h2>
+        <Link to='/'>
+          <h2>
+            {data.site.siteMetadata.title}
+          </h2>
+        </Link>
+        <hr/>
         <main>{children}</main>
         <footer>
           © Denis Bodnar {new Date().getFullYear()}

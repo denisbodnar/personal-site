@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700|IBM+Plex+Sans:400,400i,700|IBM+Plex+Serif:400,400i,700&display=swap&subset=cyrillic-ext');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700|IBM+Plex+Sans:400,400i,700|IBM+Plex+Serif:400,400i,700&display=swap');
 
 html {
   font-family: sans-serif;
@@ -43,6 +43,8 @@ template {
 }
 a {
   background-color: transparent;
+  text-decoration: none;
+  color: crimson;
   -webkit-text-decoration-skip: objects;
 }
 a:active,
