@@ -5,7 +5,7 @@ h2,
 p,
 li {
   font-family: "IBM Plex Sans", sans-serif;
-  margin-bottom: 0, 5em;
+  margin-bottom: 0,5em;
   line-height: 2em;
 }
 
@@ -24,7 +24,7 @@ a {
 
 .text {
   margin: 0;
-  line-height: 0.55;
+  line-height: 2em;
 }
 
 span {
