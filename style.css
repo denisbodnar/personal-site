@@ -60,3 +60,9 @@ span {
 .bounce {
   animation: bounce 1s infinite alternate;
 }
+
+@media print {
+  .homelink {
+    display: none;
+  }
+}
