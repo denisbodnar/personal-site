@@ -11,6 +11,19 @@
   font-display: swap;
 }
 
+.bottom-line {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  height: 100px;
+  padding: 0;
+}
+
+.bottom-line p {
+  margin: 0;
+  padding: 0;
+}
+
 @font-face {
   font-family: "IBM Plex Sans";
   font-style: normal;
@@ -42,9 +55,42 @@ h2,
 h3,
 p,
 li {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Geologica", serif;
   margin-bottom: 0, 5em;
   line-height: 2em;
+}
+
+div {
+  display: block;
+  padding: 10px;
+}
+
+h1, h2, p {
+  margin: 20px 0;
+  display: block;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  padding: 5px;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  img {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  img {
+    width: 400px;
+  }
 }
 
 p {
@@ -55,7 +101,7 @@ a {
   text-decoration: none;
   color: red;
   border-bottom: 1px solid;
-  font-style: italic;
+  font-size: 17px;
 }
 
 @media only screen and (min-width: 600px) {
