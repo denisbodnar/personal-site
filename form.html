@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Денис Боднар - Заповніть форму</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+
+</head>
+
+<body>
+    <div>
+        <p><a href="./index.html">Повернутися на головну</a></p>
+        <h1>Придбати збірку "Що я маю"</h1>
+        <p>Щоб замовити книжку, заповніть цю форму. Замовлення буде відправлено накладеним платежем</p>
+        <form id="my-form" action="https://formspree.io/f/xblkonol" method="POST">
+            <label for="name">Ім'я</label>
+            <input type="text" id="name" name="name" required>
+            <label for="last-name">Прізвище</label>
+            <input type="text" id="last-name" name="last-name" required>
+            <label for="quantity">Кількість примірників</label>
+            <input type="number" id="quantity" name="quantity" required>
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="city">Місто</label>
+            <input type="text" id="city" name="city" required>
+            <label for="post-code">Номер відділення "Нової Пошти"</label>
+            <input type="text" id="post-code" name="post-code" required>
+            <label for="description">Як підписати книжку? (Якщо книжок кілька, вкажіть, як підписати кожну)</label>
+            <textarea id="description" name="description" required></textarea>
+            <!-- <div class="file-upload-wrapper">
+                <button type="button" class="file-upload-btn" onclick="document.getElementById('receipt').click()">
+                    📎 Завантажте квитанцію
+                </button>
+                <input type="file" id="receipt" name="receipt" class="file-upload-input" accept="image/*,.pdf" required>
+            </div> -->
+            <button class="submit-btn">Отримати книжку</button>
+            <p id="my-form-status"></p>
+        </form>
+    </div>
+    <div class="bottom-line">
+        <p>&copy; <span id="current-year"></span> Денис Боднар</p>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
