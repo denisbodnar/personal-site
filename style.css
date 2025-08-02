@@ -20,25 +20,25 @@ label,
 p,
 li {
   font-family: "Geologica", serif;
-  margin-bottom: 0, 5em;
+  margin-bottom: 0.5em;
   line-height: 2em;
 }
 
 .submit-btn {
-    background: white;
-    color: black;
-    padding: 18px 40px;
-    border: 1px solid black;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.3s ease;
-    font-family: "Geologica", sans-serif;
-    position: relative;
-    overflow: hidden;
-    margin-top: 10px;
+  background: white;
+  color: red;
+  padding: 18px 40px;
+  border: 1px solid black;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-family: "Geologica", sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
 }
 
 /* .submit-btn::before {
@@ -65,16 +65,6 @@ li {
     transform: translateY(-1px);
 } */
 
-div {
-  display: block;
-  padding: 10px;
-}
-
-h1, h2, p {
-  margin: 20px 0;
-  display: block;
-}
-
 img {
   width: 100%;
   max-width: 100%;
@@ -98,22 +88,11 @@ img {
   }
 }
 
-p {
-  font-size: 17px;
-}
-
 a {
   text-decoration: none;
   color: red;
   border-bottom: 1px solid;
   font-size: 17px;
-}
-
-@media only screen and (min-width: 600px) {
-  div {
-    width: 70vw;
-    margin: 5em 15vw;
-  }
 }
 
 .text {
@@ -126,87 +105,17 @@ span {
 }
 
 @media only screen and (min-width: 768px) {
-  div {
+  body {
     max-width: 60vw;
     margin: 5em auto;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  div {
+  body {
     max-width: 80vw;
     margin: 5em auto;
   }
-}
-
-@media print {
-  .homelink {
-    display: none;
-  }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.header {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
-    text-align: center;
-    padding: 30px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 1;
-}
-
-.header p {
-    font-size: 1.1em;
-    opacity: 0.9;
-    position: relative;
-    z-index: 1;
-}
-
-.form-container {
-    padding: 40px;
-}
-
-.form-group {
-    margin-bottom: 25px;
-    position: relative;
-}
-
-.required {
-    color: #e74c3c;
 }
 
 input[type="text"],
@@ -215,14 +124,14 @@ input[type="email"],
 input[type="number"],
 textarea,
 input[type="file"] {
-    width: calc(100% - 30px);
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    background: #fafafa;
-    margin-bottom: 30px;
+  width: calc(100% - 30px);
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  margin-bottom: 30px;
 }
 
 input[type="text"]:focus,
@@ -231,69 +140,56 @@ input[type="email"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 input[type="file"]:focus {
-    outline: none;
-    border-color: #4facfe;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-    transform: translateY(-2px);
+  outline: none;
+  border-color: #4facfe;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+  transform: translateY(-2px);
 }
 
 textarea {
-    min-height: 100px;
-    resize: vertical;
+  min-height: 100px;
+  resize: vertical;
 }
 
 .file-upload-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  margin: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .file-upload-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    width: 100%;
-    text-align: center;
+  background: lightgoldenrodyellow;
+  color: gray;
+  padding: 18px 40px;
+  border: 1px solid black;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-family: "Geologica", sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
 }
 
 .file-upload-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 .file-upload-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-}
-
-.file-info {
-    margin-top: 10px;
-    padding: 10px;
-    background: #e8f5e8;
-    border-radius: 8px;
-    color: #2d5a2d;
-    font-size: 14px;
-    display: none;
-}
-
-.info-text {
-    background: #e3f2fd;
-    border-left: 4px solid #2196f3;
-    padding: 15px;
-    margin-bottom: 25px;
-    border-radius: 0 8px 8px 0;
-    color: #1565c0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }

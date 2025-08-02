@@ -4,18 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Денис Боднар - Заповніть форму</title>
+    <meta name="description" content="Придбати книжку "Що я маю" Дениса Боднара" />
+    <meta name="keywords" content="Денис Боднар, книги, збірка, "Що я маю", "Що я маю" Дениса Боднара" />
+    <meta name="author" content="Денис Боднар" />
+    <link rel="canonical" href="https://denisbodnar.com/form.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://denisbodnar.com/form.html" />
+    <meta property="og:title" content="Контактна форма - Денис Боднар" />
+    <meta property="og:description" content="Придбати книжку "Що я маю" Дениса Боднара" />
+    <meta property="og:image" content="https://denisbodnar.com/shcho-ya-mayu.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://denisbodnar.com/form.html" />
+    <meta property="twitter:title" content="Контактна форма - Денис Боднар" />
+    <meta property="twitter:description" content="Придбати книжку "Що я маю" Дениса Боднара" />
+    <meta property="twitter:image" content="https://denisbodnar.com/shcho-ya-mayu.png" />
+
+    <title>Контактна форма</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
-
 </head>
 
 <body>
-    <div>
-        <p><a href="./index.html">Повернутися на головну</a></p>
+    <main>
+        <nav>
+            <p><a href="./index.html">Повернутися на головну</a></p>
+        </nav>
         <h1>Придбати збірку "Що я маю"</h1>
-        <p>Щоб замовити книжку, заповніть цю форму. Замовлення буде відправлено накладеним платежем</p>
-        <form id="my-form" action="https://formspree.io/f/xblkonol" method="POST">
+        <p>Щоб замовити книжку, заповніть цю форму. Оплатити можна як одразу (на картку), так і після отримання книги (накладеним платежем). Вартість за кожну книжку 100 грн. Замовлення обробляються щодня, книжка відправляється за 1-2 робочі дні.</p>
+
+        <form id="my-form-2" action="https://formspree.io/f/xblkonol" method="POST">
             <label for="name">Ім'я</label>
             <input type="text" id="name" name="name" required>
             <label for="last-name">Прізвище</label>
@@ -30,19 +51,27 @@
             <input type="text" id="post-code" name="post-code" required>
             <label for="description">Як підписати книжку? (Якщо книжок кілька, вкажіть, як підписати кожну)</label>
             <textarea id="description" name="description" required></textarea>
-            <!-- <div class="file-upload-wrapper">
-                <button type="button" class="file-upload-btn" onclick="document.getElementById('receipt').click()">
-                    📎 Завантажте квитанцію
-                </button>
-                <input type="file" id="receipt" name="receipt" class="file-upload-input" accept="image/*,.pdf" required>
-            </div> -->
+
+            <input type="checkbox" id="post-payment" name="post-payment">
+            <label for="post-payment">Оплатити накладеним платежем</label>
+
+            <section id="upload-receipt">
+                <p>Оплатіть замовлення за посиланням &mdash; <a href="https://send.monobank.ua/2fvxF5q1kR" target="_blank">https://send.monobank.ua/2fvxF5q1kR</a>. Ціна за кожну книжку 100 гривень. Після оплати збережіть квитанцію та завантажте сюди</p>
+                <div class="file-upload-wrapper">
+                    <button type="button" id="file-upload-btn-2" class="file-upload-btn" onclick="document.getElementById('receipt').click()">
+                        Завантажити квитанцію
+                    </button>
+                    <input type="file" id="receipt" name="receipt" class="file-upload-input" accept="image/*,.pdf">
+                </div>
+            </section>
+
             <button class="submit-btn">Отримати книжку</button>
             <p id="my-form-status"></p>
         </form>
-    </div>
-    <div class="bottom-line">
+    </main>
+    <footer class="bottom-line">
         <p>&copy; <span id="current-year"></span> Денис Боднар</p>
-    </div>
+    </footer>
     <script src="./script.js"></script>
 </body>
 
