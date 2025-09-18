@@ -7,7 +7,7 @@
     <meta name="description" content="Придбати книжку "Речі, які я люблю" Дениса Боднара" />
     <meta name="keywords" content="Денис Боднар, книги, збірка, "Що я маю", "Що я маю" Дениса Боднара" />
     <meta name="author" content="Денис Боднар" />
-    <link rel="canonical" href="https://denisbodnar.com/form.html" />
+    <link rel="canonical" href="https://denisbodnar.com/form-rechi-yaki-ya-lyublyu.html" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -34,7 +34,7 @@
             <p><a href="./index.html">Повернутися на головну</a></p>
         </nav>
         <h1>Придбати збірку "Речі, які я люблю"</h1>
-        <p>Щоб замовити книжку, заповніть цю форму. Оплатити можна як одразу (на картку), так і після отримання книги (накладеним платежем). Вартість за кожну книжку 300 грн. Замовлення обробляються щодня, книжка відправляється за 1-2 робочі дні.</p>
+        <p>Щоб замовити книжку, заповніть цю форму. Оплатити можна як одразу (на картку), так і після отримання книги (накладеним платежем). Вартість за кожну книжку 270 грн. Замовлення обробляються щодня, книжка відправляється за 1-2 робочі дні.</p>
 
         <form id="my-form-2" action="https://formspree.io/f/xblkonol" method="POST">
             <input type="hidden" name="book" value="Речі, які я люблю">
@@ -48,16 +48,27 @@
             <input type="tel" id="phone" name="phone" required>
             <label for="city">Місто</label>
             <input type="text" id="city" name="city" required>
-            <label for="post-code">Номер відділення "Нової Пошти"</label>
+            <label for="post-code">Номер відділення "Нової Пошти" (або поштомат)</label>
             <input type="text" id="post-code" name="post-code" required>
             <label for="description">Як підписати книжку? (Якщо книжок кілька, вкажіть, як підписати кожну)</label>
             <textarea id="description" name="description" required></textarea>
+
+            <script>
+                function calculateTotalPrice() {
+                    var quantity = document.getElementById('quantity').value;
+                    var totalPrice = parseInt(quantity) * 270;
+                    document.getElementById('total-price').textContent = totalPrice + ' грн';
+                }
+                document.getElementById('quantity').addEventListener('change', calculateTotalPrice);
+            </script>
+
+            <p>Разом до оплати: <span style="font-weight: bold;" id="total-price">0 грн</span></p>
 
             <input type="checkbox" id="post-payment" name="post-payment">
             <label for="post-payment">Оплатити накладеним платежем</label>
 
             <section id="upload-receipt">
-                <p>Оплатіть замовлення за посиланням &mdash; <a href="https://send.monobank.ua/2fvxF5q1kR" target="_blank">https://send.monobank.ua/2fvxF5q1kR</a>. Ціна за кожну книжку 300 грн. Після оплати збережіть квитанцію та завантажте сюди</p>
+                <p>Оплатіть замовлення за посиланням &mdash; <a href="https://send.monobank.ua/2fvxF5q1kR" target="_blank">https://send.monobank.ua/2fvxF5q1kR</a>. Ціна за кожну книжку 270 грн. Після оплати збережіть квитанцію та завантажте сюди</p>
                 <div class="file-upload-wrapper">
                     <button type="button" id="file-upload-btn-2" class="file-upload-btn" onclick="document.getElementById('receipt').click()">
                         Завантажити квитанцію

@@ -48,10 +48,21 @@
             <input type="tel" id="phone" name="phone" required>
             <label for="city">Місто</label>
             <input type="text" id="city" name="city" required>
-            <label for="post-code">Номер відділення "Нової Пошти"</label>
+            <label for="post-code">Номер відділення "Нової Пошти" (або поштомат)</label>
             <input type="text" id="post-code" name="post-code" required>
             <label for="description">Як підписати книжку? (Якщо книжок кілька, вкажіть, як підписати кожну)</label>
             <textarea id="description" name="description" required></textarea>
+
+            <script>
+                function calculateTotalPrice() {
+                    var quantity = document.getElementById('quantity').value;
+                    var totalPrice = parseInt(quantity) * 270;
+                    document.getElementById('total-price').textContent = totalPrice + ' грн';
+                }
+                document.getElementById('quantity').addEventListener('change', calculateTotalPrice);
+            </script>
+
+            <p>Разом до оплати: <span style="font-weight: bold;" id="total-price">0 грн</span></p>
 
             <input type="checkbox" id="post-payment" name="post-payment">
             <label for="post-payment">Оплатити накладеним платежем</label>
