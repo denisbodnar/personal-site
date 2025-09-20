@@ -43,6 +43,8 @@ async function handleSubmit(event) {
     const form = event.target;
     const data = new FormData(form);
 
+    const uploadBtn = document.querySelector('#my-form-2 .file-upload-btn');
+
     fetch(form.action, {
         method: form.method,
         body: data,
@@ -53,6 +55,7 @@ async function handleSubmit(event) {
         if (response.ok) {
             status.innerHTML = "Дякую за заповнення форми! Незабаром книжка відправиться до вас";
             form.reset();
+            uploadBtn.textContent = 'Завантажте квитанцію';
         } else {
             response.json().then(data => {
                 if (Object.hasOwn(data, 'errors')) {
