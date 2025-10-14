@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-const successMessage = "<h2>Чудово!</h2><p>Дякую за заповнення форми. Ваші дані отримано, а це значить, що незабаром ваше замовлення відправиться до вас.</p>";
+const successMessage = "<h2>Чудово!</h2><p>Дякую за заповнену форму. Дані отримано, а це значить, що незабаром ваше замовлення відправиться до вас.</p>";
+const forgotReceiptMessage = "<h2>Ой, ви дещо забули</h2><p>Будь ласка, завантажте квитанцію</p>";
+const errorMessage = "<h2>Ой, щось пішло не так</h2><p>Будь ласка, спробуйте ще раз.</p>";
 
 async function handleSubmit(event) {
     event.preventDefault();
@@ -48,12 +50,17 @@ async function handleSubmit(event) {
     const currentUrl = window.location.href;
 
     const uploadBtn = document.querySelector('#my-form-2 .file-upload-btn');
+    const submitBtn = form.querySelector('.submit-btn');
 
     if (!form['post-payment'].checked && data.get('receipt').size === 0) {
         status.style.display = 'block';
-        status.innerHTML = "<h2>Ой, ви дещо забули</h2><p>Будь ласка, завантажте квитанцію</p>";
+        status.innerHTML = forgotReceiptMessage;
         return;
     }
+
+    // Add loading state
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
 
     fetch(form.action, {
         method: form.method,
@@ -62,9 +69,13 @@ async function handleSubmit(event) {
             'Accept': 'application/json'
         }
     }).then(response => {
+        // Remove loading state
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+
         if (response.ok) {
             status.style.display = 'block';
-            status.innerHTML = successMessage + "<p><a href=\"" + currentUrl + "\">Заповнити ще одну форму</a></p>";
+            status.innerHTML = successMessage + "<p>Щось забули? Завжди можна <a href=\"" + currentUrl + "\">заповнити ще раз</a></p>";
             form.reset();
             form.style.display = 'none';
 
@@ -74,11 +85,15 @@ async function handleSubmit(event) {
                 if (Object.hasOwn(data, 'errors')) {
                     status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
                 } else {
-                    status.innerHTML = "Ой, з формою якась халепа";
+                    status.innerHTML = errorMessage;
                 }
             });
         }
     }).catch(error => {
-        status.innerHTML = "Ой, щось пішло не так";
+        // Remove loading state on error
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        
+        status.innerHTML = errorMessage;
     });
 }
