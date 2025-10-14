@@ -37,13 +37,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+const successMessage = "<h2>Чудово!</h2><p>Дякую за заповнення форми. Ваші дані отримано, а це значить, що незабаром ваше замовлення відправиться до вас.</p>";
+
 async function handleSubmit(event) {
     event.preventDefault();
     const status = document.getElementById("my-form-status");
     const form = event.target;
     const data = new FormData(form);
 
+    const currentUrl = window.location.href;
+
     const uploadBtn = document.querySelector('#my-form-2 .file-upload-btn');
+
+    if (!form['post-payment'].checked && data.get('receipt').size === 0) {
+        status.style.display = 'block';
+        status.innerHTML = "<h2>Ой, ви дещо забули</h2><p>Будь ласка, завантажте квитанцію</p>";
+        return;
+    }
 
     fetch(form.action, {
         method: form.method,
@@ -53,8 +63,11 @@ async function handleSubmit(event) {
         }
     }).then(response => {
         if (response.ok) {
-            status.innerHTML = "Дякую за заповнення форми! Незабаром книжка відправиться до вас";
+            status.style.display = 'block';
+            status.innerHTML = successMessage + "<p><a href=\"" + currentUrl + "\">Заповнити ще одну форму</a></p>";
             form.reset();
+            form.style.display = 'none';
+
             uploadBtn.textContent = 'Завантажте квитанцію';
         } else {
             response.json().then(data => {
