@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Публікатор — Денис Боднар</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .drop-zone {
+      border: 2px dashed #000;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      margin: 2rem 0;
+      transition: background 0.15s;
+    }
+    .drop-zone.dragover {
+      background: #f0f0f0;
+    }
+    .drop-zone label {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    #preview-frame {
+      width: 100%;
+      height: 600px;
+      border: 2px solid #000;
+      margin-top: 1rem;
+      display: block;
+    }
+    #result {
+      display: none;
+    }
+    .filename-display {
+      font-family: monospace;
+      font-size: 0.85em;
+      margin: 1rem 0 0.5rem;
+    }
+    #download-btn {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border: 2px solid #000;
+      background: #fff;
+      color: #ff0000;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #download-btn:hover {
+      background: #f5f5f5;
+    }
+    details {
+      margin: 1rem 0;
+    }
+    details pre {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      font-size: 0.85em;
+      overflow-x: auto;
+    }
+    details summary {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <p>
+      <a href="./index.html">Повернутися на головну</a>
+    </p>
+  </nav>
+  <main>
+    <h1>Публікатор сторінок</h1>
+
+    <p>Завантажте <code>.md</code> файл — отримаєте готовий <code>.html</code>, який залишиться лише перемістити в папку сайту.</p>
+
+    <details>
+      <summary>Формат файлу (frontmatter)</summary>
+      <pre>---
+title: Назва сторінки
+description: Короткий опис для SEO
+image: ./my-image.png
+---
+
+# Заголовок
+
+Текст контенту...</pre>
+      <p>Всі поля необов'язкові. Якщо <code>title</code> відсутній — буде використано перший заголовок <code>#</code>.</p>
+    </details>
+
+    <div class="drop-zone" id="drop-zone">
+      <p>Перетягніть <code>.md</code> файл сюди або <label for="file-input">оберіть файл</label></p>
+      <input type="file" id="file-input" accept=".md,text/markdown" style="display:none" />
+    </div>
+
+    <div id="result">
+      <p class="filename-display">Буде збережено як: <strong id="output-filename"></strong></p>
+      <a id="download-btn" href="#" download>Завантажити HTML</a>
+      <h2>Попередній перегляд</h2>
+      <iframe id="preview-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+  </main>
+  <footer class="bottom-line">
+    <p>&copy; <span id="current-year"></span> Денис Боднар</p>
+  </footer>
+  <script src="./script.js"></script>
+  <script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const result = document.getElementById('result');
+    const outputFilename = document.getElementById('output-filename');
+    const downloadBtn = document.getElementById('download-btn');
+    const previewFrame = document.getElementById('preview-frame');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) processFile(file);
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) processFile(fileInput.files[0]);
+    });
+
+    function processFile(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => convert(e.target.result);
+      reader.readAsText(file);
+    }
+
+    function parseFrontmatter(text) {
+      const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)([\s\S]*)$/);
+      if (!match) return { meta: {}, content: text };
+
+      const meta = {};
+      match[1].split('\n').forEach(line => {
+        const colon = line.indexOf(':');
+        if (colon > 0) {
+          const key = line.slice(0, colon).trim();
+          const value = line.slice(colon + 1).trim();
+          if (key) meta[key] = value;
+        }
+      });
+
+      return { meta, content: match[2] };
+    }
+
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function escapeAttr(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function convert(text) {
+      const { meta, content } = parseFrontmatter(text);
+
+      const firstH1 = content.match(/^#\s+(.+)$/m);
+      const title = meta.title || (firstH1 ? firstH1[1].trim() : 'Нова сторінка');
+      const description = meta.description || '';
+      const image = meta.image || '';
+
+      const filename = slugify(title) + '.html';
+      const baseUrl = 'https://denisbodnar.com/';
+      const pageUrl = baseUrl + filename;
+      const imageUrl = image.startsWith('./')
+        ? baseUrl + image.slice(2)
+        : (image || baseUrl + 'favicon.png');
+
+      const htmlContent = marked.parse(content);
+
+      const html = `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="${escapeAttr(description)}" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Денис Боднар" />
+  <link rel="canonical" href="${escapeAttr(pageUrl)}" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="${escapeAttr(pageUrl)}" />
+  <meta property="og:title" content="${escapeAttr(title)}" />
+  <meta property="og:description" content="${escapeAttr(description)}" />
+  <meta property="og:image" content="${escapeAttr(imageUrl)}" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="${escapeAttr(pageUrl)}" />
+  <meta property="twitter:title" content="${escapeAttr(title)}" />
+  <meta property="twitter:description" content="${escapeAttr(description)}" />
+  <meta property="twitter:image" content="${escapeAttr(imageUrl)}" />
+
+  <title>${escapeHtml(title)}</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+</head>
+
+<body>
+  <nav>
+    <p>
+      <a href="./index.html">Повернутися на головну</a>
+    </p>
+  </nav>
+  <main>
+    ${htmlContent}
+  </main>
+  <footer class="bottom-line">
+    <p>&copy; <span id="current-year"></span> Денис Боднар</p>
+  </footer>
+  <script src="./script.js"><\/script>
+</body>
+
+</html>`;
+
+      // Update UI
+      outputFilename.textContent = filename;
+      result.style.display = 'block';
+
+      // Download link
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      downloadBtn.href = url;
+      downloadBtn.download = filename;
+
+      // Preview
+      previewFrame.srcdoc = html;
+    }
+  </script>
+</body>
+
+</html>
