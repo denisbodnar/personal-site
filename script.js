@@ -62,12 +62,12 @@ async function handleSubmit(event) {
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
 
+    // Netlify Forms: POST the multipart FormData (which already includes the
+    // form-name field and the receipt file) to the form's own page path. No
+    // Content-Type header so the browser sets the multipart boundary.
     fetch(form.action, {
         method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
+        body: data
     }).then(response => {
         // Remove loading state
         submitBtn.disabled = false;
@@ -81,13 +81,8 @@ async function handleSubmit(event) {
 
             uploadBtn.textContent = 'Завантажте квитанцію';
         } else {
-            response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                    status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                } else {
-                    status.innerHTML = errorMessage;
-                }
-            });
+            status.style.display = 'block';
+            status.innerHTML = errorMessage;
         }
     }).catch(error => {
         // Remove loading state on error
