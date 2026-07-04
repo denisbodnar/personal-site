@@ -36,7 +36,10 @@
         <h1>Придбати збірки "Що я маю" та "Речі, які я люблю"</h1>
         <p>Щоб замовити книжки, заповніть цю форму. Оплатити можна як одразу (на картку), так і після отримання книг (накладеним платежем). Вартість за книжку "Що я маю" 100 грн, за книжку "Речі, які я люблю" 300 грн. Замовлення обробляються щодня, книжка відправляється за 1-2 робочі дні.</p>
 
-        <form id="my-form-2" action="https://formspree.io/f/xblkonol" method="POST">
+        <form id="my-form-2" name="order-both-books" method="POST" action="/form-general.html"
+            enctype="multipart/form-data" data-netlify="true" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="order-both-books">
+            <p hidden><label>Leave blank: <input name="bot-field"></label></p>
             <input type="hidden" name="book" value="Обидві книжки">
             <label for="quantity-shcho-ya-mayu">Кількість примірників "Що я маю"</label>
             <input type="number" id="quantity-shcho-ya-mayu" name="quantity-shcho-ya-mayu" required>

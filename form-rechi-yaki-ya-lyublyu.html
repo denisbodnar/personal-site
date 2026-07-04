@@ -36,7 +36,10 @@
         <h1>Придбати збірку "Речі, які я люблю"</h1>
         <p>Щоб замовити книжку, заповніть цю форму. Оплатити можна як одразу (на картку), так і після отримання книги (накладеним платежем). Вартість за кожну книжку 270 грн. Замовлення обробляються щодня, книжка відправляється за 1-2 робочі дні.</p>
 
-        <form id="my-form-2" action="https://formspree.io/f/xblkonol" method="POST">
+        <form id="my-form-2" name="order-rechi-yaki-ya-lyublyu" method="POST" action="/form-rechi-yaki-ya-lyublyu.html"
+            enctype="multipart/form-data" data-netlify="true" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="order-rechi-yaki-ya-lyublyu">
+            <p hidden><label>Leave blank: <input name="bot-field"></label></p>
             <input type="hidden" name="book" value="Речі, які я люблю">
             <label for="name">Ім'я</label>
             <input type="text" id="name" name="name" required>
